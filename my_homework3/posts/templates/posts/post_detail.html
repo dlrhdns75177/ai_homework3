@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>게시글 상세 보기</h1>
+<h3>제목 : {{ post.title }}</h3>
+<p>내용 : {{ post.content }}</p>
+<p>{{ post.created_at }}</p>
+<p>{{ post.updated_at }}</p>
+
+<a href="{% url "posts:update" post.pk%}">
+    <button>수정하기</button>
+</a>
+<form action="{% url "posts:confirm_delete" post.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">삭제</button>
+</form>
+{% endblock content %}

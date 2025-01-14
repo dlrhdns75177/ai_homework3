@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{% if post %}
+    게시글 수정
+    {% else %}
+    게시글 작성
+    {% endif %}</h1>
+
+<form action="{% if post %}{% url "posts:update" post.pk %}{% else %}{% url "posts:create" %}{% endif %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="{% if post %}수정{% else %}저장{% endif %}">
+</form>
+{% endblock content %}
