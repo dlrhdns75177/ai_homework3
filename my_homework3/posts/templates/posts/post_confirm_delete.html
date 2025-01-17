@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>{{ post.pk }}번 게시글을 삭제하시겠습니까?</h2>
-<form action="{% url "posts:delete" post.pk %}">
+<h2>해당 게시글을 삭제하시겠습니까?</h2>
+<form action="{% url "posts:delete" post.pk %}" method="POST">
     {% csrf_token %}
     <button type="submit">예</button>
 </form>

@@ -1,7 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <h1>메인화면</h1>
+
+<img src="{% static 'posts/jjang91.jpg' %}" alt="">
+<h3>{{ request.user.username }}님, 안녕하세요!</h3>
 <ul>
     <li><a href="{% url "posts:list" %}">글목록</a></li>
     

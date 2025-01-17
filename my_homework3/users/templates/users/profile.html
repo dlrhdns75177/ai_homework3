@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>나의 프로필</h1>
+{% if profile.image %}
+    <img src="{{ profile.image.url }}" alt="프로필 이미지" >
+{% endif %}
+<p>닉네임 : {{ profile.nickname }}</p>
+<p>소개글 : {{ profile.intro }}</p>
+<a href="{% url "users:edit" %}"><button>프로필 수정</button></a>
+{% endblock content %}

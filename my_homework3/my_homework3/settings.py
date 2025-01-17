@@ -85,6 +85,7 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = "users.CustomUser"
+LOGIN_URL = "/users/login/" #기본세팅이 원래는 accounts/로 되어 있는데 우리는 users에 있는 로그인url을 사용할거니까
 
 
 # Password validation
@@ -121,7 +122,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "static/" 
+STATICFILES_DIRS = [BASE_DIR/'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles' 
+
+#Media files
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

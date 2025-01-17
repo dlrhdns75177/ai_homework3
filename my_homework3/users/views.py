@@ -3,7 +3,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.views.decorators.http import require_POST
-from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
+from .forms import CustomUserCreationForm, ProfileForm
+from .models import Profile
+from django.shortcuts import get_object_or_404
 
 def login(request):
     if request.method =="POST":
@@ -39,3 +42,38 @@ def signup(request):
         "form":form
     }
     return render(request,"users/signup.html",context)
+
+
+def new_profile(request):
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect("users:profile")
+    else:
+        form = ProfileForm()
+    context = {
+        "form":form
+    }
+    return render(request,"users/new_profile.html",context)
+
+@login_required
+def user_profile(request):
+    profile = Profile.objects.filter(user=request.user).first()
+    '''
+    Profile 테이블의 user 필드는 onetoone필드니까 해당 모델이랑 연결해줘야한다(user=request.user)
+    프로필 페이지에서 보여주기만 하면 되니까 post없이 get 요청만
+    '''
+    if not profile:
+        return redirect("users:new_profile")
+    context = {
+        "profile":profile
+    }
+    return render(request,"users/profile.html",context)
+
+
+def edit_profile(request):
+    pass
+

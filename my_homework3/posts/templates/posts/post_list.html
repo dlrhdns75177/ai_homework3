@@ -9,7 +9,7 @@
     {% for post in posts %}
     <a href={% url "posts:detail" post.pk %}>
         <ul>
-            <li>{{ post.id }}|{{ post.title }}</li>
+            <li>{{ post.id }} | {{ post.title }}</li>
         </ul>
     </a>
     {% endfor %}
