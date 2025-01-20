@@ -21,11 +21,13 @@ def post_detail(reqeust,pk):
     comment_form = CommentForm()
     comment = post.comment.all().order_by("-pk")
     comment_count = post.comment.count()
+    like_count = post.like_user.count()
     context = {
         "post":post,
         "comment_form":comment_form,
         "comments":comment,
-        "count":comment_count
+        "count":comment_count,
+        "like_count":like_count
     }
     return render(reqeust,"posts/post_detail.html",context)
 
@@ -107,6 +109,19 @@ def comment_delete(request,pk,comment_pk):
     comment = get_object_or_404(Comment,pk=comment_pk)
     comment.delete()
     return redirect("posts:detail",pk)
+
+def like(request,pk):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post,pk=pk)
+        if post.like_user.filter(pk=request.user.pk).exists():
+            post.like_user.remove(request.user)
+        else:
+            post.like_user.add(request.user)
+        return redirect("posts:detail",pk)
+    return redirect("users:login")
+
+
+            
 
 
 

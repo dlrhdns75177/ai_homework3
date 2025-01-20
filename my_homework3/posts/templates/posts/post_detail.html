@@ -18,6 +18,22 @@
 </form>
 {% endif %}
 
+<hr>
+<br>
+<h2>좋아요</h2>
+<h3>총 좋아요 {{ like_count }}개</h3>
+<form action="{% url "posts:like" post.pk %}" method="POST">
+    {% csrf_token %}
+    {% if request.user in post.like_user.all %}
+    <button class="btn btn-link text-danger">
+        <i class="fa-solid fa-heart"></i>
+    </button>
+    {% else %}
+    <button class="btn btn-link text-danger">
+        <i class="fa-regular fa-heart"></i>
+    </button>
+    {% endif %}
+</form>
 <br>
 <hr>
 <h2>댓글</h2>

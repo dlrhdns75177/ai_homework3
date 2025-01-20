@@ -12,4 +12,5 @@ urlpatterns = [
     path("<int:pk>/comment/",views.comment,name="comment"),
     path("<int:pk>/comment/<comment_pk>/update",views.comment_update,name="comment_update"),
     path("<int:pk>/comment/<int:comment_pk>/delelte",views.comment_delete,name="comment_delete"),
+    path("<int:pk>/likes/",views.like,name="like"),
 ]
