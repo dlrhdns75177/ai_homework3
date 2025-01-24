@@ -26,6 +26,7 @@ urlpatterns = [
     path("main/",views.main,name="main"),
     path("posts/",include("posts.urls")),
     path("users/",include("users.urls")),
+    path("chatbot/",include("chatbot.urls")),
 ]
 
 

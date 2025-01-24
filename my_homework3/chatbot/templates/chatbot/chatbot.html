@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>챗봇</h1>
+<h2>오늘도 옷 코디하는 것이 고민이시라구요? 저한테 맡겨주세요!</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="text" name="message" id="message" placeholder = "질문해주세요">
+    <button type="submit">전송</button>
+</form>
+<br>
+
+<ul>
+{% for c in chat %}
+    <li>
+        <p>나 : {{ c.user_message }}</p><br>
+        <p>코디봇 : {{ c.bot_message }}</p><br>
+        <p>{{ c.created_at }}</p>
+    </li>
+{% endfor %}
+</ul>
+
+
+{% endblock content %}
